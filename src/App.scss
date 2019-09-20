@@ -1,0 +1,25 @@
+.main {
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr [login] 2fr 1fr;
+
+  .login {
+    height: 100vh;
+    grid-column-start: login;
+    align-items: end;
+    display: flex;
+
+    > form {
+      border: rgba(204, 204, 204, 0.712) solid 1px;
+      border-radius: 10px;
+      padding: 20px;
+      display: grid;
+      align-self: center;
+      width: 100%;
+    }
+  }
+}
+
+body {
+  margin: 0;
+}

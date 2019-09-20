@@ -1,3 +1,4 @@
+/* eslint no-use-before-define: 0 */ // --> OFF
 // This optional code is used to register a service worker.
 // register() is not called by default.
 
@@ -48,6 +49,7 @@ export function register(config) {
         });
       } else {
         // Is not localhost. Just register service worker
+        // @eslint-ignore
         registerValidSW(swUrl, config);
       }
     });
