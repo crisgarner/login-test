@@ -6,8 +6,8 @@
   .login {
     height: 100vh;
     grid-column-start: login;
-    align-items: end;
     display: flex;
+    align-items: flex-end;
 
     > form {
       border: rgba(204, 204, 204, 0.712) solid 1px;

@@ -1,0 +1,38 @@
+/* The Modal (background) */
+.modal-wrapper {
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr [middle] 2fr 1fr;
+  pointer-events: none;
+
+  /* Modal Content/Box */
+  .modal-card {
+    background-color: #fefefe;
+    padding: 20px;
+    margin: 0 90px;
+    border: 3px solid #000;
+    display: grid;
+    border-radius: 15px;
+    align-self: center;
+    grid-column-start: middle;
+    pointer-events: auto;
+    height: 400px;
+
+    i {
+      color: rgba(0, 0, 0, 1);
+    }
+  }
+
+  @media only screen and (max-width: 600px) {
+    .modal-card {
+      margin: 0 0px;
+    }
+  }
+}

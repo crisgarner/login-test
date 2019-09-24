@@ -1,13 +1,21 @@
 import React, { useState } from "react";
 import { Form, FormGroup, Label, Input, Button } from "reactstrap";
+import ModalButton from "./ModalButton";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isOpen, open] = useState(false);
+
+  const createAccount = (e: React.FormEvent<EventTarget>) => {
+    e.preventDefault();
+    console.log("account created");
+  };
+
   return (
     <>
       <div className="login">
-        <Form>
+        <Form onSubmit={e => createAccount(e)}>
           <FormGroup>
             <Label for="userEmail">Email</Label>
             <Input
@@ -32,7 +40,10 @@ const Login = () => {
               }}
             />
           </FormGroup>
-          <Button>Create Account</Button>
+          <Button color="primary" onClick={() => open(!isOpen)}>
+            Create Account
+          </Button>
+          <ModalButton isOpen={isOpen} open={open}></ModalButton>
         </Form>
       </div>
     </>
