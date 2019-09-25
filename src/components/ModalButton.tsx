@@ -25,11 +25,17 @@ const ModalButton = (props: any) => {
     <>
       <animated.div style={style} className="modal-wrapper" ref={ref}>
         <div className="modal-card">
-          <i className="far fa-times-circle fa-2x"></i>
+          <i
+            className="far fa-times-circle fa-2x"
+            onClick={() => {
+              open(false);
+            }}
+          ></i>
           <h3>Modal Title</h3>
           <p>Modal text</p>
-          <Button color="primary">Buton 1</Button>
-          <Button color="danger">Buton 2</Button>
+          <Button color="primary" className="acceptButton">
+            Buton 1
+          </Button>
         </div>
       </animated.div>
     </>

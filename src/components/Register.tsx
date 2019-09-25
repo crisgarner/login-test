@@ -1,27 +1,28 @@
 import React, { useState } from "react";
 import { Container, Form, FormGroup, Label, Input, Button } from "reactstrap";
 
-const Login = (props: any) => {
+const Register = (props: any) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const { open } = props;
-  const signIn = (e: React.FormEvent<EventTarget>) => {
+  const createAccount = (e: React.FormEvent<EventTarget>) => {
     e.preventDefault();
-    if (email && password) {
+    if (email && password && confirmPassword) {
       open(true);
     }
   };
   return (
     <>
       <Container>
-        <Form onSubmit={e => signIn(e)}>
+        <Form onSubmit={e => createAccount(e)}>
           <FormGroup>
             <Label for="userEmail">Email</Label>
             <Input
               type="email"
               name="userEmail"
               value={email}
-              placeholder=""
+              placeholder="your@email.com"
               onChange={e => {
                 setEmail(e.target.value);
               }}
@@ -33,26 +34,34 @@ const Login = (props: any) => {
               type="password"
               name="userPassword"
               value={password}
-              placeholder=""
+              placeholder="your secret password"
               onChange={e => {
                 setPassword(e.target.value);
               }}
             />
           </FormGroup>
+          <FormGroup>
+            <Label for="confirmPassword">Confirm Password</Label>
+            <Input
+              type="password"
+              name="confirmPassword"
+              value={confirmPassword}
+              placeholder="your secret password"
+              onChange={e => {
+                setConfirmPassword(e.target.value);
+              }}
+            />
+          </FormGroup>
           <Button color="primary">
-            <i className="fa fa-envelope-open-text mr-2"></i>Sign In With Email
+            <i className="fa fa-user-circle mr-2"></i>Create an Account
           </Button>
         </Form>
-        <p>or</p>
-        <Button color="primary">
-          <i className="fab fa-ethereum mr-2"></i>Sign In With Ethereum
-        </Button>
       </Container>
       <p>
-        Need an account? <a href="#">Create one</a>
+        Have an account? <a href="#">Sign In</a>
       </p>
     </>
   );
 };
 
-export default Login;
+export default Register;
