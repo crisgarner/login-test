@@ -1,16 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Container, Form, FormGroup, Label, Input, Button } from "reactstrap";
+import ModalContext from "./ModalContext";
 
-const Login = (props: any) => {
+const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { open } = props;
+  const { open, setTitle, setContent, setButtonText } = useContext(ModalContext);
+  setTitle("Login");
+  setContent("Content");
+  setButtonText("Button");
+
   const signIn = (e: React.FormEvent<EventTarget>) => {
     e.preventDefault();
     if (email && password) {
       open(true);
     }
   };
+
   return (
     <>
       <Container>
@@ -49,7 +55,7 @@ const Login = (props: any) => {
         </Button>
       </Container>
       <p>
-        Need an account? <a href="#">Create one</a>
+        Need an account? <a href="register">Create one</a>
       </p>
     </>
   );

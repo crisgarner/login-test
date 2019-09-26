@@ -1,19 +1,68 @@
 import React, { useState } from "react";
-import ModalButton from "./ModalButton";
+import Modal from "./Modal";
 import Login from "./Login";
 import Register from "./Register";
+//@ts-ignore
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { ModalProvider } from "./ModalContext";
 
 const Auth = () => {
   const [isOpen, open] = useState(false);
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
+  const [buttonText, setButtonText] = useState("");
+  const modalInfo = {
+    isOpen,
+    open,
+    title,
+    setTitle,
+    content,
+    setContent,
+    buttonText,
+    setButtonText
+  };
+
   return (
-    <>
+    <ModalProvider value={modalInfo}>
       <div className="login">
         <div className="wrapper">
           <h1>Logo</h1>
-          <Login open={open}></Login>
+          <Router>
+            <Routes></Routes>
+          </Router>
         </div>
       </div>
-      <ModalButton open={open} isOpen={isOpen}></ModalButton>
+      <Modal></Modal>
+    </ModalProvider>
+  );
+};
+
+const Routes = () => {
+  return (
+    <>
+      <Switch>
+        <Route
+          exact
+          path="/"
+          component={() => {
+            return <Login></Login>;
+          }}
+        />
+        <Route
+          exact
+          path="/login"
+          component={() => {
+            return <Login></Login>;
+          }}
+        />
+        <Route
+          exact
+          path="/register"
+          component={() => {
+            return <Register></Register>;
+          }}
+        />
+      </Switch>
     </>
   );
 };

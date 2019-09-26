@@ -1,11 +1,13 @@
-import React, { useState, useRef } from "react";
+import React, { useRef, useContext } from "react";
 import { useSpring, animated, config } from "react-spring";
 import { Button } from "reactstrap";
 import useOutsideClick from "./UseOutsideClick";
-import "./ModalButton.scss";
+import ModalContext from "./ModalContext";
+import "./Modal.scss";
 
-const ModalButton = (props: any) => {
-  const { open, isOpen } = props;
+const Modal = () => {
+  const { open, isOpen, title, content, buttonText } = useContext(ModalContext);
+
   const ref = useRef<HTMLInputElement>(null);
   useOutsideClick(ref, () => {
     if (isOpen) {
@@ -31,10 +33,16 @@ const ModalButton = (props: any) => {
               open(false);
             }}
           ></i>
-          <h3>Modal Title</h3>
-          <p>Modal text</p>
-          <Button color="primary" className="acceptButton">
-            Buton 1
+          <h3>{title}</h3>
+          <p>{content}</p>
+          <Button
+            color="primary"
+            className="acceptButton"
+            onClick={() => {
+              open(false);
+            }}
+          >
+            {buttonText}
           </Button>
         </div>
       </animated.div>
@@ -42,4 +50,4 @@ const ModalButton = (props: any) => {
   );
 };
 
-export default ModalButton;
+export default Modal;
