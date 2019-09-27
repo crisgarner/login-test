@@ -1,7 +1,7 @@
 import React, { useRef, useContext } from "react";
 import { useSpring, animated, config } from "react-spring";
 import { Button } from "reactstrap";
-import useOutsideClick from "./UseOutsideClick";
+import useOutsideClick from "./hooks/UseOutsideClick";
 import ModalContext from "./ModalContext";
 import "./Modal.scss";
 

@@ -1,20 +1,25 @@
 import React, { useState, useContext, useEffect } from "react";
 import { Container, Form, FormGroup, Label, Input, Button } from "reactstrap";
 import ModalContext from "./ModalContext";
+import { useAuth } from "./hooks/useAuth";
 
 const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const { open, setTitle, setContent, setButtonText } = useContext(ModalContext);
-  setTitle("Login");
-  setContent("Content");
-  setButtonText("Button");
+  // setTitle("Login");
+  // setContent("Content");
+  // setButtonText("Button");
+  //TODO: set types to return
+  const auth: any = useAuth();
 
   const createAccount = (e: React.FormEvent<EventTarget>) => {
     e.preventDefault();
     if (email && password && confirmPassword && password == confirmPassword) {
-      open(true);
+      const x = auth.signup(email, password);
+      console.log(x);
+      // open(true);
     }
   };
 

@@ -1,19 +1,66 @@
 import React, { useState, useContext, useEffect } from "react";
 import { Container, Form, FormGroup, Label, Input, Button } from "reactstrap";
 import ModalContext from "./ModalContext";
+import Web3Connect from "web3connect";
+//@ts-ignore
+import WalletConnectProvider from "@walletconnect/web3-provider";
+import Portis from "@portis/web3";
+//@ts-ignore
+import Fortmatic from "fortmatic";
+//@ts-ignore
+import Web3 from "web3";
+import { useAuth } from "./hooks/useAuth";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { open, setTitle, setContent, setButtonText } = useContext(ModalContext);
-  setTitle("Login");
-  setContent("Content");
-  setButtonText("Button");
+  // setTitle("Login");
+  // setContent("Content");
+  // setButtonText("Button");
+  const auth: any = useAuth();
+
+  const web3Connect = new Web3Connect.Core({
+    network: "rinkeby",
+    providerOptions: {
+      walletconnect: {
+        package: WalletConnectProvider, // required
+        options: {
+          infuraId: process.env.REACT_APP_INFURA_ID // required
+        }
+      },
+      portis: {
+        package: Portis, // required
+        options: {
+          id: process.env.REACT_APP_PORTIS_ID // required
+        }
+      },
+      fortmatic: {
+        package: Fortmatic, // required
+        options: {
+          key: process.env.REACT_APP_FORTMATIC_KEY // required
+        }
+      }
+    }
+  });
+
+  // subscribe to connect
+  web3Connect.on("connect", (provider: any) => {
+    const web3 = new Web3(provider); // add provider to web3
+    console.log("TCL: Login -> web3", web3);
+  });
+
+  // subscribe to close
+  web3Connect.on("close", () => {
+    console.log("Web3Connect Modal Closed"); // modal has closed
+  });
 
   const signIn = (e: React.FormEvent<EventTarget>) => {
     e.preventDefault();
     if (email && password) {
-      open(true);
+      const x = auth.signin(email, password);
+      console.log(x);
+      // open(true);
     }
   };
 
@@ -50,7 +97,12 @@ const Login = () => {
           </Button>
         </Form>
         <p>or</p>
-        <Button color="primary">
+        <Button
+          color="primary"
+          onClick={() => {
+            web3Connect.toggleModal();
+          }}
+        >
           <i className="fab fa-ethereum mr-2"></i>Sign In With Ethereum
         </Button>
       </Container>

@@ -2,12 +2,15 @@ import React from "react";
 import "./App.scss";
 import { Container } from "reactstrap";
 import Auth from "./components/Auth";
+import { ProvideAuth } from "./components/hooks/useAuth";
 
 const App = () => {
   return (
-    <Container className="main">
-      <Auth></Auth>
-    </Container>
+    <ProvideAuth>
+      <Container className="main">
+        <Auth></Auth>
+      </Container>
+    </ProvideAuth>
   );
 };
 

@@ -5,6 +5,7 @@ import Register from "./Register";
 //@ts-ignore
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { ModalProvider } from "./ModalContext";
+import { useAuth } from "./hooks/useAuth";
 
 const Auth = () => {
   const [isOpen, open] = useState(false);
@@ -21,6 +22,9 @@ const Auth = () => {
     buttonText,
     setButtonText
   };
+
+  const auth = useAuth();
+  console.log("TCL: Auth -> auth", auth);
 
   return (
     <ModalProvider value={modalInfo}>
