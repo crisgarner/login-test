@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import Modal from "./Modal";
+import Modal from "../modal/Modal";
 import Login from "./Login";
 import Register from "./Register";
 //@ts-ignore
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { ModalProvider } from "./ModalContext";
-import { useAuth } from "./hooks/useAuth";
+import { ModalProvider } from "../modal/ModalContext";
+import { useAuth } from "../hooks/useAuth";
 
 const Auth = () => {
   const [isOpen, open] = useState(false);

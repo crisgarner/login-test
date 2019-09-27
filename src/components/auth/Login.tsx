@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 import { Container, Form, FormGroup, Label, Input, Button } from "reactstrap";
-import ModalContext from "./ModalContext";
+import ModalContext from "../modal/ModalContext";
 import Web3Connect from "web3connect";
 //@ts-ignore
 import WalletConnectProvider from "@walletconnect/web3-provider";
@@ -9,7 +9,7 @@ import Portis from "@portis/web3";
 import Fortmatic from "fortmatic";
 //@ts-ignore
 import Web3 from "web3";
-import { useAuth } from "./hooks/useAuth";
+import { useAuth } from "../hooks/useAuth";
 
 const Login = () => {
   const [email, setEmail] = useState("");

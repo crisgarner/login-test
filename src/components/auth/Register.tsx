@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import { Container, Form, FormGroup, Label, Input, Button } from "reactstrap";
-import ModalContext from "./ModalContext";
-import { useAuth } from "./hooks/useAuth";
+import ModalContext from "../modal/ModalContext";
+import { useAuth } from "../hooks/useAuth";
 
 const Register = () => {
   const [email, setEmail] = useState("");
