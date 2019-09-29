@@ -1,15 +1,14 @@
 import React, { useState, useContext, useEffect } from "react";
 import { Container, Form, FormGroup, Label, Input, Button } from "reactstrap";
 import ModalContext from "../modal/ModalContext";
-import Web3Connect from "web3connect";
+import { useAuth } from "../hooks/useAuth";
+import { useWeb3Auth } from "../hooks/useWeb3Auth";
+import useWeb3Connect from "../hooks/useWeb3Connect";
 //@ts-ignore
 import WalletConnectProvider from "@walletconnect/web3-provider";
-import Portis from "@portis/web3";
 //@ts-ignore
 import Fortmatic from "fortmatic";
-//@ts-ignore
-import Web3 from "web3";
-import { useAuth } from "../hooks/useAuth";
+import Portis from "@portis/web3";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -19,8 +18,8 @@ const Login = () => {
   // setContent("Content");
   // setButtonText("Button");
   const auth: any = useAuth();
-
-  const web3Connect = new Web3Connect.Core({
+  const web3Auth: any = useWeb3Auth();
+  const webConnectOptions: any = {
     network: "rinkeby",
     providerOptions: {
       walletconnect: {
@@ -42,18 +41,12 @@ const Login = () => {
         }
       }
     }
-  });
+  };
+  const onConnectCallback = async (provider: any) => {
+    await web3Auth.signIn(provider);
+  };
 
-  // subscribe to connect
-  web3Connect.on("connect", (provider: any) => {
-    const web3 = new Web3(provider); // add provider to web3
-    console.log("TCL: Login -> web3", web3);
-  });
-
-  // subscribe to close
-  web3Connect.on("close", () => {
-    console.log("Web3Connect Modal Closed"); // modal has closed
-  });
+  const web3connect: any = useWeb3Connect(webConnectOptions, onConnectCallback);
 
   const signIn = (e: React.FormEvent<EventTarget>) => {
     e.preventDefault();
@@ -100,7 +93,7 @@ const Login = () => {
         <Button
           color="primary"
           onClick={() => {
-            web3Connect.toggleModal();
+            web3connect.toggleModal();
           }}
         >
           <i className="fab fa-ethereum mr-2"></i>Sign In With Ethereum

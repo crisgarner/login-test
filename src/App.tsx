@@ -3,14 +3,16 @@ import "./App.scss";
 import { Container } from "reactstrap";
 import Auth from "./components/auth/Auth";
 import { ProvideAuth } from "./components/hooks/useAuth";
-
+import { Web3ProvideAuth } from "./components/hooks/useWeb3Auth";
 const App = () => {
   return (
-    <ProvideAuth>
-      <Container className="main">
-        <Auth></Auth>
-      </Container>
-    </ProvideAuth>
+    <Web3ProvideAuth>
+      <ProvideAuth>
+        <Container className="main">
+          <Auth></Auth>
+        </Container>
+      </ProvideAuth>
+    </Web3ProvideAuth>
   );
 };
 

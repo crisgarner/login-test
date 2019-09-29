@@ -6,7 +6,8 @@ import Register from "./Register";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { ModalProvider } from "../modal/ModalContext";
 import { useAuth } from "../hooks/useAuth";
-
+import { useWeb3Auth } from "../hooks/useWeb3Auth";
+import Dashboard from "../Dashboard";
 const Auth = () => {
   const [isOpen, open] = useState(false);
   const [title, setTitle] = useState("");
@@ -24,16 +25,14 @@ const Auth = () => {
   };
 
   const auth = useAuth();
-  console.log("TCL: Auth -> auth", auth);
+  const web3Auth: any = useWeb3Auth();
 
   return (
     <ModalProvider value={modalInfo}>
       <div className="login">
         <div className="wrapper">
           <h1>Logo</h1>
-          <Router>
-            <Routes></Routes>
-          </Router>
+          <Router>{web3Auth.web3Auth ? <Dashboard></Dashboard> : <Routes></Routes>}</Router>
         </div>
       </div>
       <Modal></Modal>
